@@ -42,11 +42,11 @@ public class LoanCalc {
 	public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		iterationCounter = 0;
 		double initialGuess = loan / n;
-		double balance = 1;
+		double balance = endBalance(loan, rate, n, initialGuess);
 		while (balance > 0) {
-			balance = endBalance(loan, rate, n, initialGuess);
 			initialGuess += epsilon;
 			iterationCounter++;
+			balance = endBalance(loan, rate, n, initialGuess);
 		}
 		return initialGuess;
     }
@@ -71,7 +71,7 @@ public class LoanCalc {
 			if (balance >= -epsilon && balance <= epsilon) {
 				return middle;
 			}
-			
+
 			if (balance > 0) {
 				low = middle;
 			} else {
